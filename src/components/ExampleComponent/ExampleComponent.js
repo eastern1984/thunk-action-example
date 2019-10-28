@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actions'
+import * as actionCreators from '../../store/actions/actions';
 
 class ExampleComponent extends Component {
+
+    sendRequest(type) { 
+        if (type) {
+            this.props.dispatchActAsync();
+        } else {
+            this.props.dispatchActAsyncBad()
+        }
+    }
+
     render() {
         return (
             <div>
-                <p>Example1 {this.props.exComp2}</p>
-                <button onClick={() => this.props.dispatchAct2(123)} >Send</button>
+                <p>Press any key</p>
+                <p>{ this.props.message }</p>
+                <button onClick={() => this.sendRequest(1)} >Send Async</button>
+                <button onClick={() => this.sendRequest(0)} >Send Bad Async</button>
             </div>
         );
     }
@@ -15,14 +26,14 @@ class ExampleComponent extends Component {
 
 const mapStateToProps = state => {
     return {
-        exComp2: state.someVar2
+        message: state.msg
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        dispatchAct1: (value) => dispatch({type: actionTypes.EXAMPLE_ACTION_1, someNewValue: value}),
-        dispatchAct2: (value) => dispatch({type: actionTypes.EXAMPLE_ACTION_2, someNewValue: value})
+        dispatchActAsync: (value) => dispatch(actionCreators.exampleActionAsyns()),
+        dispatchActAsyncBad: (value) => dispatch(actionCreators.exampleActionAsynsErr()),
     }
 }
 

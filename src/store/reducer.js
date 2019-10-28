@@ -1,28 +1,17 @@
-import * as actionTypes from './actions';
+import * as actionTypes from './actions/actions';
 
 const initialState = {
-    someVar1: { 
-        field1: 1, 
-        field2: '123',
-    },
-    someVar2: 12
+    someVar2: 12,
+    msg: null
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.EXAMPLE_ACTION_1:
             return {
-                ...state,
-                someVar1: {
-                    ...state.someVar1,
-                    field1: action.someNewValue,
-                }    
-            };
-        case actionTypes.EXAMPLE_ACTION_2:
-            return {
-                ...state,
-                field2: action.someNewValueForField2,
-            };
+                    ...state,
+                    msg: action.msg,
+                };    
         default:
                 return state;
     }
