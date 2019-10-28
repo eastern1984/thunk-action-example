@@ -1,7 +1,6 @@
 import * as actionTypes from './actions/actions';
 
 const initialState = {
-    someVar2: 12,
     msg: null
 };
 
